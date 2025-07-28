@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Commit Message Tool</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Git Commit Message Generator</h1>
+  <form action="/commit" method="POST">
+    <label for="type">Commit Type:</label>
+    <select name="type" id="type" required>
+      <option value="feat">feat</option>
+      <option value="fix">fix</option>
+      <option value="docs">docs</option>
+      <option value="style">style</option>
+      <option value="refactor">refactor</option>
+      <option value="test">test</option>
+      <option value="chore">chore</option>
+    </select>
+
+    <label for="message">Commit Message:</label>
+    <input type="text" id="message" name="message" required>
+
+    <button type="submit">Generate Commit</button>
+  </form>
+</body>
+</html>
