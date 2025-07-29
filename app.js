@@ -1,24 +1,28 @@
+// app.js
 const express = require('express');
+const dotenv = require('dotenv');
 const path = require('path');
-const bodyParser = require('body-parser');
+const githubRoutes = require('./routes/github');
 
-const commitRoutes = require('./routes/commitRoutes');
+dotenv.config(); 
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Set EJS
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Static files
+
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: true }));
 
-// Routes
-app.use('/', commitRoutes);
 
-// Server
-const PORT = process.env.PORT || 3000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.use('/', githubRoutes); 
+
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });

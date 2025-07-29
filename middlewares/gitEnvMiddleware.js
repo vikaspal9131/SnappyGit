@@ -1,10 +1,19 @@
-module.exports = (req, res, next) => {
-  // Example: Check if inside git repo
-  const { exec } = require('child_process');
-  exec('git rev-parse --is-inside-work-tree', (err) => {
-    if (err) {
-      return res.send("❌ Not a git repository.");
+exports.validateInput = (req, res, next) => {
+    const { username, repoName, startDate, endDate, token } = req.body;
+
+    if (!username || !repoName || !startDate || !endDate || !token) {
+        return res.render('index', { message: 'All fields are required.' });
     }
-    next();
-  });
+
+
+    if (isNaN(new Date(startDate).getTime()) || isNaN(new Date(endDate).getTime())) {
+        return res.render('index', { message: 'Invalid start or end date.' });
+    }
+
+    if (new Date(startDate) > new Date(endDate)) {
+        return res.render('index', { message: 'Start date cannot be after end date.' });
+    }
+
+   
+    next(); 
 };

@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Commit Message Tool</title>
-  <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnappyGit - Green Your GitHub</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <h1>Git Commit Message Generator</h1>
-  <form action="/commit" method="POST">
-    <label for="type">Commit Type:</label>
-    <select name="type" id="type" required>
-      <option value="feat">feat</option>
-      <option value="fix">fix</option>
-      <option value="docs">docs</option>
-      <option value="style">style</option>
-      <option value="refactor">refactor</option>
-      <option value="test">test</option>
-      <option value="chore">chore</option>
-    </select>
+    <div class="container">
+        <h1>SnappyGit</h1>
+        <p>Generate fake commits to make your GitHub green!</p>
 
-    <label for="message">Commit Message:</label>
-    <input type="text" id="message" name="message" required>
+        <% if (message) { %>
+            <p class="error-message"><%= message %></p>
+        <% } %>
 
-    <button type="submit">Generate Commit</button>
-  </form>
+        <form action="/generate-commits" method="POST">
+            <label for="username">GitHub Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="repoName">Repository Name (must exist):</label>
+            <input type="text" id="repoName" name="repoName" required>
+
+            <label for="token">GitHub Personal Access Token:</label>
+            <input type="password" id="token" name="token" required>
+            <small>Needs 'repo' scope.</small>
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required>
+
+            <button type="submit">Generate Commits</button>
+        </form>
+    </div>
 </body>
 </html>
