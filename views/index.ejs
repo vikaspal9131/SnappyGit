@@ -1,39 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnappyGit - Green Your GitHub</title>
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnappyGit - Green Your GitHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>SnappyGit</h1>
-        <p>Generate fake commits to make your GitHub green!</p>
+<body class="bg-[#000000] text-white  flex items-center justify-center px-5">
 
-        <% if (message) { %>
-            <p class="error-message"><%= message %></p>
-        <% } %>
 
-        <form action="/generate-commits" method="POST">
-            <label for="username">GitHub Username:</label>
-            <input type="text" id="username" name="username" required>
+  <div class="container flex justify-between mt-10  ">
+    
+  
 
-            <label for="repoName">Repository Name (must exist):</label>
-            <input type="text" id="repoName" name="repoName" required>
+    <!-- Right Side Form -->
+    <div class=" rounded-xl w-[600px]  ">
+      <p class="mb-[50px] text-[27px] ">We are here to solve your problem. Submit  contact information, we will get in touch with you.</p>
+      <% if (message) { %>
+        <p class="text-red-400 mb-4"><%= message %></p>
+      <% } %>
 
-            <label for="token">GitHub Personal Access Token:</label>
-            <input type="password" id="token" name="token" required>
-            <small>Needs 'repo' scope.</small>
+      <form action="/generate-commits" method="POST" class="space-y-5 ">
+        <div class="flex justify-between">
+          
+          <div>
+            <label for="username" class="block mb-1 text-[#B7B7B7]">GitHub Username:</label>
+            <input type="text" id="username" name="username" required 
+            class="w-[250px] bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white placeholder-gray-400">
+          </div>
 
-            <label for="startDate">Start Date:</label>
-            <input type="date" id="startDate" name="startDate" required>
+          <div>
+            <label for="username" class="block mb-1 text-[#B7B7B7]">Email ID:</label>
+            <input type="text" id="Email" name="Email" required 
+            class="w-[250px] bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white placeholder-gray-400">
+          </div>
+        </div>
 
-            <label for="endDate">End Date:</label>
-            <input type="date" id="endDate" name="endDate" required>
+        <div>
+          <label for="repoName" class="block mb-1 text-[#B7B7B7]">Repository Name (must exist):</label>
+          <input type="text" id="repoName" name="repoName" required 
+                 class="w-full bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white placeholder-gray-400">
+        </div>
 
-            <button type="submit">Generate Commits</button>
-        </form>
+        <div>
+          <label for="token" class="block mb-1 text-[#B7B7B7]">GitHub Personal Access Token:</label>
+          <input type="password" id="token" name="token" required 
+                 class="w-full bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white placeholder-gray-400">
+          <small class="text-gray-400">Needs 'repo' scope.</small>
+        </div>
+
+        <div class="flex justify-between w-[350px] "> 
+          <div>
+            <label for="startDate" class="block mb-1">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required 
+            class=" bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white">
+          </div>
+          
+          <div>
+            <label for="endDate" class="block mb-1">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required 
+            class=" bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-white text-black px-5 py-2 rounded-md font-semibold hover:bg-gray-300">
+          Generate Commits
+        </button>
+      </form>
     </div>
+  </div>
 </body>
 </html>
