@@ -3,71 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SnappyGit - Green Your GitHub</title>
+  <title>SnappyGit</title>
   <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
-<body class="bg-[#000000] text-white  flex items-center justify-center px-5">
+<body class=" bg-[#C4DEFE] ">
+  <header class="w-full px-6 py-4 flex justify-between items-center">
+    <div class="text-xl font-bold"><i class="ri-dribbble-fill"></i> SnappyGit</div>
+    <button class="ml-4 px-4 py-1 bg-black text-white rounded-lg hover:bg-gray-800"><i class="ri-github-fill"></i> Git login</button>
+  </header>
+  <!-- Navbar -->
+<section class="text-center px-6 py-20 flex flex-col md:flex-row justify-between items-center w-full gap-10">
+  <!-- Left Content -->
+  <div class="text-start flex justify-center items-center w-full md:w-1/2">
+    <div>
+      <h1 class="text-4xl md:text-7xl font-bold leading-tight">
+        AI that helps you during meetings, not after
+      </h1>
+      <p class="mt-4 text-gray-700 max-w-xl">
+        Always have the answers you need with live AI insights during meetings, sales calls, and everything on your computer.
+      </p>
+      <div class="mt-6 flex flex-col sm:flex-row justify-start gap-4">
+        <button id="openModal" class="flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800">
+          Download for Windows
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Image -->
+  <div class="w-full md:w-1/2 flex justify-center">
+    <img src="https://wptavern.com/wp-content/uploads/2022/11/github-codespaces.webp" alt="AI Meeting App" class="rounded-lg max-w-full">
+  </div>
+</section>
 
 
-  <div class="container flex justify-between mt-10  ">
+
+  <!-- Popup Modal (Hidden by default) -->
+<div id="formModal" class="hidden fixed inset-0 bg-black bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-2">
+  <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 w-full max-w-sm sm:max-w-3xl relative">
+    <button id="closeModal" class="absolute top-3 right-3 text-gray-600 text-2xl font-bold hover:text-black">&times;</button>
     
-  
+    <h2 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800">We are here to solve your problem</h2>
+    <p class="text-gray-600 mb-6 text-sm sm:text-base">Submit your contact information, we will get in touch with you.</p>
 
-    <!-- Right Side Form -->
-    <div class=" rounded-xl w-[600px]  ">
-      <p class="mb-[50px] text-[27px] ">We are here to solve your problem. Submit  contact information, we will get in touch with you.</p>
+    <div class="w-full">
       <% if (message) { %>
-        <p class="text-red-400 mb-4"><%= message %></p>
+        <p class="text-red-500 mb-4 text-sm font-medium"><%= message %></p>
       <% } %>
 
-      <form action="/generate-commits" method="POST" class="space-y-5 ">
-        <div class="flex justify-between">
-          
-          <div>
-            <label for="username" class="block mb-1 text-[#B7B7B7]">GitHub Username:</label>
+      <form action="/generate-commits" method="POST" class="space-y-4 sm:space-y-5">
+        <!-- GitHub Username & Email -->
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
+          <div class="flex-1">
+            <label for="username" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Username:</label>
             <input type="text" id="username" name="username" required 
-            class="w-[250px] bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white placeholder-gray-400">
+              class="w-full bg-white text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
           </div>
 
-          <div>
-            <label for="username" class="block mb-1 text-[#B7B7B7]">Email ID:</label>
-            <input type="text" id="Email" name="Email" required 
-            class="w-[250px] bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white placeholder-gray-400">
+          <div class="flex-1">
+            <label for="Email" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Email ID:</label>
+            <input type="email" id="Email" name="Email" required 
+              class="w-full bg-white text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
           </div>
         </div>
 
+        <!-- Repo Name -->
         <div>
-          <label for="repoName" class="block mb-1 text-[#B7B7B7]">Repository Name (must exist):</label>
+          <label for="repoName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Repository Name (must exist):</label>
           <input type="text" id="repoName" name="repoName" required 
-                 class="w-full bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white placeholder-gray-400">
+            class="w-full bg-white text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
         </div>
 
+        <!-- Token -->
         <div>
-          <label for="token" class="block mb-1 text-[#B7B7B7]">GitHub Personal Access Token:</label>
+          <label for="token" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Personal Access Token:</label>
           <input type="password" id="token" name="token" required 
-                 class="w-full bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white placeholder-gray-400">
+            class="w-full bg-white text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
           <small class="text-gray-400">Needs 'repo' scope.</small>
         </div>
 
-        <div class="flex justify-between w-[350px] "> 
-          <div>
-            <label for="startDate" class="block mb-1">Start Date:</label>
+        <!-- Date Fields -->
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
+          <div class="flex-1">
+            <label for="startDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Start Date:</label>
             <input type="date" id="startDate" name="startDate" required 
-            class=" bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white">
+              class="w-full bg-white text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
           </div>
           
-          <div>
-            <label for="endDate" class="block mb-1">End Date:</label>
+          <div class="flex-1">
+            <label for="endDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">End Date:</label>
             <input type="date" id="endDate" name="endDate" required 
-            class=" bg-[#111113] px-4 py-3 rounded-[10px] outline-none text-white">
+              class="w-full bg-white text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
           </div>
         </div>
 
-        <button type="submit" class="w-full bg-white text-black px-5 py-2 rounded-md font-semibold hover:bg-gray-300">
+        <!-- Submit Button -->
+        <button type="submit" class="w-full bg-black text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold hover:bg-gray-800 transition text-sm sm:text-base">
           Generate Commits
         </button>
       </form>
     </div>
   </div>
+</div>
+
+
+
+
+  <script>
+    // Open Modal
+    document.getElementById("openModal").addEventListener("click", function () {
+      document.getElementById("formModal").classList.remove("hidden");
+    });
+
+    // Close Modal
+    document.getElementById("closeModal").addEventListener("click", function () {
+      document.getElementById("formModal").classList.add("hidden");
+    });
+
+    // Close modal on outside click
+    window.addEventListener("click", function (e) {
+      const modal = document.getElementById("formModal");
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  </script>
+
 </body>
 </html>
