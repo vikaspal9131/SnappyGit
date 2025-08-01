@@ -5,37 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SnappyGit</title>
   <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- google font  -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
+
+  
 </head>
-<body class=" bg-[#C4DEFE] ">
-  <header class="w-full px-6 py-4 flex justify-between items-center">
-    <div class="text-xl font-bold"><i class="ri-dribbble-fill"></i> SnappyGit</div>
-    <button class="ml-4 px-4 py-1 bg-black text-white rounded-lg hover:bg-gray-800"><i class="ri-github-fill"></i> Git login</button>
+<body class="bg-[#C4DEFE] font-[Gabarito] px-4 sm:px-6 lg:px-[100px] ">
+  <header class="w-full px-4 sm:px-6 py-4 flex justify-between items-center">
+    <div class="text-xl font-bold flex items-center gap-2">
+      <i class="ri-dribbble-fill"></i> SnappyGit
+    </div>
+    <button class="ml-4 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 flex items-center gap-2">
+      <i class="ri-github-fill"></i> Git login
+    </button>
   </header>
-  <!-- Navbar -->
-<section class="text-center px-6 py-20 flex flex-col md:flex-row justify-between items-center w-full gap-10">
-  <!-- Left Content -->
-  <div class="text-start flex justify-center items-center w-full md:w-1/2">
-    <div>
-      <h1 class="text-4xl md:text-7xl font-bold leading-tight">
-        AI that helps you during meetings, not after
-      </h1>
-      <p class="mt-4 text-gray-700 max-w-xl">
-        Always have the answers you need with live AI insights during meetings, sales calls, and everything on your computer.
-      </p>
-      <div class="mt-6 flex flex-col sm:flex-row justify-start gap-4">
-        <button id="openModal" class="flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800">
-          Download for Windows
-        </button>
+
+  <!-- Hero Section -->
+  <section class="text-center px-4 sm:px-6 py-10 md:py-20 flex flex-col md:flex-row justify-between items-center w-full ">
+    <!-- Left Content -->
+    <div class="text-start flex justify-center items-center w-full md:w-1/2">
+      <div>
+        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+          AI that helps you during meetings, not after
+        </h1>
+        <p class="mt-4 text-gray-700 max-w-xl">
+          Always have the answers you need with live AI insights during meetings, sales calls, and everything on your computer.
+        </p>
+        <div class="mt-6 flex flex-col sm:flex-row justify-start gap-4">
+          <button id="openModal" class="flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800">
+            Generate Commits
+          </button>
+          <button class="flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800">
+            See Demo
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Right Image -->
-  <div class="w-full md:w-1/2 flex justify-center">
-    <img src="https://wptavern.com/wp-content/uploads/2022/11/github-codespaces.webp" alt="AI Meeting App" class="rounded-lg max-w-full">
-  </div>
-</section>
+    <!-- Right Icon -->
+    <div class="flex justify-center items-center w-full  md:w-1/2">
+      <img src="https://pngimg.com/d/github_PNG34.png " alt="" class="w-[400px]">
+      <!-- <i class="ri-github-fill text-[200px] sm:text-[300px] mt-[10px] lg:text-[450px] "></i> -->
+    </div>
+  </section>
+</body>
+
 
 
 
@@ -110,6 +129,9 @@
 
 
 
+ <footer class="text-center mt-[80px]">Made by Sphnixe</footer>
+</body>
+
   <script>
     // Open Modal
     document.getElementById("openModal").addEventListener("click", function () {
@@ -130,5 +152,4 @@
     });
   </script>
 
-</body>
 </html>
