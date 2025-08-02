@@ -65,64 +65,77 @@
     </div>
 
     <!-- Right Form -->
-    <div class="flex justify-center items-center w-full md:w-1/2 border ">
-      <div class="rounded-xl  p-6 sm:p-8 w-full max-w-sm sm:max-w-3xl relative">
-        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h1>
-        <p class="text-gray-600 mb-6 text-sm sm:text-base">Submit your contact information, we will get in touch with you.</p>
+ <div class="flex justify-center items-center w-full md:w-1/2 border">
+  <div class="rounded-xl p-6 sm:p-8 w-full max-w-sm sm:max-w-3xl relative">
+    <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h1>
+    <p class="text-gray-600 mb-6 text-sm sm:text-base">Submit your contact information, we will get in touch with you.</p>
 
-        <form action="/generate-commits" method="POST" class="space-y-4 sm:space-y-5">
-          <!-- GitHub Username & Email -->
-          <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
-            <div class="flex-1">
-              <label for="username" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Username:</label>
-              <input type="text" id="username" name="username" required
-                class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3  outline-none placeholder-gray-500  focus:ring-2  border border-gray-300 rounded-lg focus:ring-blue-500 text-sm sm:text-base">
-            </div>
+    <form action="/generate-commits" method="POST" class="space-y-4 sm:space-y-5">
 
-            <div class="flex-1">
-              <label for="Email" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Email ID:</label>
-              <input type="email" id="Email" name="Email" required
-                class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-            </div>
-          </div>
+      <!-- GitHub Username & Email -->
+      <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
+        <div class="flex-1">
+          <label for="username" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Username:</label>
+          <input type="text" id="username" name="username" required
+            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3  outline-none placeholder-gray-500  focus:ring-2  border border-gray-300 rounded-lg focus:ring-blue-500 text-sm sm:text-base">
+        </div>
 
-          <!-- Repo Name -->
-          <div>
-            <label for="repoName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Repository Name (must exist):</label>
-            <input type="text" id="repoName" name="repoName" required
-              class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-          </div>
-
-          <!-- Token -->
-          <div>
-            <label for="token" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Personal Access Token:</label>
-            <input type="password" id="token" name="token" required
-              class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-            <small class="text-gray-400">Needs 'repo' scope.</small>
-          </div>
-
-          <!-- Date Fields -->
-          <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
-            <div class="flex-1">
-              <label for="startDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Start Date:</label>
-              <input type="date" id="startDate" name="startDate" required
-                class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-            </div>
-            
-            <div class="flex-1">
-              <label for="endDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">End Date:</label>
-              <input type="date" id="endDate" name="endDate" required
-                class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-            </div>
-          </div>
-
-          <!-- Submit Button -->
-          <button type="submit" class="w-full bg-black text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold hover:bg-gray-800 transition text-sm sm:text-base">
-            Generate Commits
-          </button>
-        </form>
+        <div class="flex-1">
+          <label for="Email" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Email ID:</label>
+          <input type="email" id="Email" name="Email" required
+            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+        </div>
       </div>
-    </div>
+
+      <!-- Repo Name -->
+      <div>
+        <label for="repoName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Repository Name (must exist):</label>
+        <input type="text" id="repoName" name="repoName" required
+          class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+      </div>
+
+      <!-- Token -->
+      <div>
+        <label for="token" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Personal Access Token:</label>
+        <input type="password" id="token" name="token" required
+          class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+        <small class="text-gray-400">Needs 'repo' scope.</small>
+      </div>
+
+      <!-- Project Selection Dropdown -->
+      <div>
+        <label for="projectName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Select Project:</label>
+        <select id="projectName" name="projectName" required
+          class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+          <% projects.forEach(project => { %>
+            <option value="<%= project %>"><%= project %></option>
+          <% }); %>
+        </select>
+      </div>
+
+      <!-- Date Fields -->
+      <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
+        <div class="flex-1">
+          <label for="startDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Start Date:</label>
+          <input type="date" id="startDate" name="startDate" required
+            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+        </div>
+        
+        <div class="flex-1">
+          <label for="endDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">End Date:</label>
+          <input type="date" id="endDate" name="endDate" required
+            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="w-full bg-black text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold hover:bg-gray-800 transition text-sm sm:text-base">
+        Generate Commits
+      </button>
+    </form>
+  </div>
+</div>
+
   </section>
 
   <!-- Popup Modal (Hidden by default) -->
