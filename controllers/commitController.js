@@ -37,7 +37,7 @@ exports.generateCommits = async (req, res) => {
             console.warn('Pull failed, probably empty repo. Continuing...');
         }
 
-        //  Read all files (except .git)
+        //  Read all files except .git
         function getAllFiles(dirPath, arrayOfFiles = [], basePath = dirPath) {
             const files = fs.readdirSync(dirPath);
             files.forEach(file => {
@@ -61,52 +61,47 @@ exports.generateCommits = async (req, res) => {
         });
 
         let totalLines = Object.values(fileMap).reduce((sum, lines) => sum + lines.length, 0);
-        let totalDays = Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1);
-
-        let currentDate = new Date(start);
         let fileQueue = Object.entries(fileMap).map(([file, lines]) => ({ file, lines, index: 0 }));
 
-        let remainingLines = totalLines;
-        let remainingDays = totalDays;
+        let currentDate = new Date(start);
 
         while (currentDate <= end) {
-            let todayLines = Math.max(1, Math.ceil(remainingLines / remainingDays));
-            let linesAdded = 0;
+            let commitsToday = Math.floor(Math.random() * 10) + 1; // 1–10 commits per day
 
-            fileQueue.forEach(f => {
-                while (linesAdded < todayLines && f.index < f.lines.length) {
-                    const filePath = path.join(tempRepo, f.file);
-                    fs.appendFileSync(filePath, f.lines[f.index] + "\n");
-                    execSync(`git add "${f.file}"`, { cwd: tempRepo });
-                    f.index++;
-                    linesAdded++;
+            for (let i = 0; i < commitsToday; i++) {
+                let linesAdded = 0;
+
+                fileQueue.forEach(f => {
+                    if (linesAdded < 5 && f.index < f.lines.length) { // max 5 lines per commit
+                        const filePath = path.join(tempRepo, f.file);
+                        fs.appendFileSync(filePath, f.lines[f.index] + "\n");
+                        execSync(`git add "${f.file}"`, { cwd: tempRepo });
+                        f.index++;
+                        linesAdded++;
+                    }
+                });
+
+                if (linesAdded > 0) {
+                    execSync(`git commit -m "Code commit on ${currentDate.toDateString()}"`, {
+                        cwd: tempRepo,
+                        env: {
+                            ...process.env,
+                            GIT_AUTHOR_DATE: currentDate.toISOString(),
+                            GIT_COMMITTER_DATE: currentDate.toISOString()
+                        }
+                    });
+                } else {
+                    execSync(`git commit --allow-empty -m "Empty commit on ${currentDate.toDateString()}"`, {
+                        cwd: tempRepo,
+                        env: {
+                            ...process.env,
+                            GIT_AUTHOR_DATE: currentDate.toISOString(),
+                            GIT_COMMITTER_DATE: currentDate.toISOString()
+                        }
+                    });
                 }
-            });
-
-            //  Commit (if lines added)
-            if (linesAdded > 0) {
-                execSync(`git commit -m "Code commit on ${currentDate.toDateString()}"`, {
-                    cwd: tempRepo,
-                    env: {
-                        ...process.env,
-                        GIT_AUTHOR_DATE: currentDate.toISOString(),
-                        GIT_COMMITTER_DATE: currentDate.toISOString()
-                    }
-                });
-            } else {
-                //  Empty commit if no code left
-                execSync(`git commit --allow-empty -m "Empty commit on ${currentDate.toDateString()}"`, {
-                    cwd: tempRepo,
-                    env: {
-                        ...process.env,
-                        GIT_AUTHOR_DATE: currentDate.toISOString(),
-                        GIT_COMMITTER_DATE: currentDate.toISOString()
-                    }
-                });
             }
 
-            remainingLines -= linesAdded;
-            remainingDays--;
             currentDate.setDate(currentDate.getDate() + 1);
         }
 
