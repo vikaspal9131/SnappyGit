@@ -7,162 +7,170 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
-  <!-- google font  -->
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
 </head>
-<body class="  font-[Gabarito] px-4 sm:px-6 lg:px-[100px]">
+<body class="font-[Gabarito] px-4 sm:px-6 lg:px-[100px]">
   <header class="w-full px-4 sm:px-6 py-4 flex justify-between items-center">
     <div class="text-lg sm:text-xl flex items-center gap-1">
       <i class="ri-dribbble-fill"></i>SnappyGit
     </div>
-    <button class="ml-4 px-3 sm:px-4 py-1 text-black border border-black rounded-lg hover:bg-gray-800 flex items-center gap-2 text-sm sm:text-base">
+    <a href="/login" class="ml-4 px-3 border border-black sm:px-4 py-1 text-black rounded-lg hover:bg-gray-800 hover:text-white transition 1 flex items-center gap-2 text-sm sm:text-base">
       <i class="ri-github-fill"></i> Git login
-    </button>
+    </a>
   </header>
 
-<div class="text-center mt-[50px] sm:mt-[80px] lg:mt-[100px] mb-[80px] sm:mb-[100px] lg:mb-[140px] flex items-center justify-center gap-6 sm:gap-12 lg:gap-[100px] px-4">
-    
-  
-  <div class="flex">
-    <p><i class="ri-add-fill text-3xl sm:text-7xl lg:text-8xl text-[#D2F94E]  "></i></p>
-    <div>
-
-   
-    <h1 class="text-[26px] sm:text-5xl lg:text-7xl leading-tight">
-      SnappyGit – your shortcut  <br class="hidden sm:block">to a greener GitHub chart
-    </h1>
-    <p class="mt-4 sm:mt-6 text-sm sm:text-base">
-    Transform your GitHub profile with a consistently active look by developer journey
-      <br class="hidden sm:block">filling past gaps in your contribution graph and showcasing your real 
-    </p>
-    <button  class="mt-4 bg-[#D2F94E] text-black px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base inline-block">
-      Generate Commits
-    </button>
-
-     </div>
-    <p><i class="ri-add-fill text-3xl sm:text-7xl lg:text-8xl text-[#D2F94E]"></i></p>
+  <div class="text-center mt-[50px] sm:mt-[80px] lg:mt-[100px] mb-[80px] sm:mb-[100px] lg:mb-[140px] flex items-center justify-center gap-6 sm:gap-12 lg:gap-[100px] px-4">
+    <div class="flex">
+      <p><i class="ri-add-fill text-3xl sm:text-7xl lg:text-8xl text-[#D2F94E]"></i></p>
+      <div>
+        <h1 class="text-[26px] sm:text-5xl lg:text-7xl leading-tight">
+          SnappyGit – your shortcut <br class="hidden sm:block">to a greener GitHub chart
+        </h1>
+        <p class="mt-4 sm:mt-6 text-sm sm:text-base">
+          Transform your GitHub profile with a consistently active look by developer journey
+          <br class="hidden sm:block">filling past gaps in your contribution graph and showcasing your real 
+        </p>
+        <button class="mt-4 bg-[#D2F94E] text-black px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base inline-block hover:bg-[#D2F94E]/80 transition 1">
+          Generate Commits
+        </button>
+      </div>
+      <p><i class="ri-add-fill text-3xl sm:text-7xl lg:text-8xl text-[#D2F94E]"></i></p>
+    </div>
   </div>
-
-</div>
-
 
   <!-- Hero Section -->
   <section class="text-start px-4 sm:px-6 py-10 md:py-20 flex flex-col md:flex-row justify-between gap-4 w-full">
     <!-- Left Content -->
     <div class="text-start flex w-full md:w-1/2 mb-8 md:mb-0">
-      <div >
-        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl  leading-tight">
-          AI that helps you during meetings, 
+      <div>
+        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-6xl leading-tight">
+          No Clue What to <br> Do Just Watch this !
         </h1>
         <p class="mt-4 text-gray-700 max-w-xl">
-          Always have the answers you need with live AI insights during meetings, sales calls, and everything on your computer.
+          Watch this detailed step-by-step guide on creating your GitHub Personal Access Token, understanding the required scopes, and using it securely to generate commits to your repository.
         </p>
         <img src="https://images.ctfassets.net/8aevphvgewt8/4zdWoJhLRcNgdkRQn7lBG4/3467a5833e1b04ac12fd7f608d26dadb/code-search-hero.webp?fm=webp" alt="" class="w-[530px]">
-       
       </div>
     </div>
 
     <!-- Right Form -->
- <div class="flex justify-center items-center w-full md:w-1/2 border">
-  <div class="rounded-xl p-6 sm:p-8 w-full max-w-sm sm:max-w-3xl relative">
-    <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h1>
-    <p class="text-gray-600 mb-6 text-sm sm:text-base">Submit your contact information, we will get in touch with you.</p>
+    <div class="flex justify-center items-center w-full md:w-1/2 border">
+      <% if (typeof success !== "undefined" && success) { %>
+      <div style="
+          background: #d4edda;
+          color: #155724;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #c3e6cb;
+          border-radius: 5px;
+          text-align: center;
+      ">
+          <%= success %>
+      </div>
+      <% } %>
 
-    <form action="/generate-commits" method="POST" class="space-y-4 sm:space-y-5">
+      <div class="rounded-xl p-6 sm:p-8 w-full max-w-sm sm:max-w-3xl relative">
+        <div class="container">
+          <!-- ✅ Error message show karega -->
+          <% if (typeof message !== "undefined" && message) { %>
+          <div style="
+              background: #ffdddd;
+              color: #d8000c;
+              padding: 10px;
+              margin-bottom: 15px;
+              border: 1px solid #d8000c;
+              border-radius: 5px;
+              text-align: center;
+          ">
+              <%= message %>
+          </div>
+          <% } %>
 
-      <!-- GitHub Username & Email -->
-      <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
-        <div class="flex-1">
-          <label for="username" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Username:</label>
-          <input type="text" id="username" name="username" required
-            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3  outline-none placeholder-gray-500  focus:ring-2  border border-gray-300 rounded-lg focus:ring-blue-500 text-sm sm:text-base">
+          <h1 class="text-xl mb-[50px] text-gray-700">Fill in your repo details and pick a date range to begin</h1>
+
+          <form action="/generate-commits" method="POST" class="space-y-4 sm:space-y-5">
+            <!-- GitHub Username & Email -->
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
+              <div class="flex-1">
+                <label for="username" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Username:</label>
+                <input type="text" id="username" name="username" required
+                  class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 outline-none placeholder-gray-500 focus:ring-2 border border-gray-300 rounded-lg focus:ring-blue-500 text-sm sm:text-base">
+              </div>
+
+              <div class="flex-1">
+                <div>
+                  <label for="projectName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Select Project:</label>
+                  <select id="projectName" name="projectName" required
+                    class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+                    <% projects.forEach(project => { %>
+                      <option value="<%= project %>"><%= project %></option>
+                    <% }); %>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Repo Name -->
+            <div>
+              <label for="repoName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Repository Name (must exist):</label>
+              <input type="text" id="repoName" name="repoName" required
+                class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+            </div>
+
+            <!-- Token -->
+            <div>
+              <label for="token" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Personal Access Token:</label>
+              <input type="password" id="token" name="token" required
+                class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+              <small class="text-gray-400">Needs 'repo' scope.</small>
+            </div>
+
+            <!-- Date Fields -->
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
+              <div class="flex-1">
+                <label for="startDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required
+                  class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+              </div>
+              
+              <div class="flex-1">
+                <label for="endDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required
+                  class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+              </div>
+            </div>
+
+            <!-- Submit Button with Loader -->
+            <button id="generateBtn" type="submit"
+              class="relative w-full bg-black text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold hover:bg-gray-800 transition text-sm sm:text-base flex justify-center items-center gap-2">
+              <span id="btnText">Generate Commits</span>
+              <span id="loader" class="hidden border-2 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></span>
+            </button>
+          </form>
         </div>
-
-        <div class="flex-1">
-          <label for="Email" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Email ID:</label>
-          <input type="email" id="Email" name="Email" required
-            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-        </div>
       </div>
-
-      <!-- Repo Name -->
-      <div>
-        <label for="repoName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Repository Name (must exist):</label>
-        <input type="text" id="repoName" name="repoName" required
-          class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-      </div>
-
-      <!-- Token -->
-      <div>
-        <label for="token" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Personal Access Token:</label>
-        <input type="password" id="token" name="token" required
-          class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none placeholder-gray-500 border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-        <small class="text-gray-400">Needs 'repo' scope.</small>
-      </div>
-
-      <!-- Project Selection Dropdown -->
-      <div>
-        <label for="projectName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Select Project:</label>
-        <select id="projectName" name="projectName" required
-          class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-          <% projects.forEach(project => { %>
-            <option value="<%= project %>"><%= project %></option>
-          <% }); %>
-        </select>
-      </div>
-
-      <!-- Date Fields -->
-      <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
-        <div class="flex-1">
-          <label for="startDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Start Date:</label>
-          <input type="date" id="startDate" name="startDate" required
-            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-        </div>
-        
-        <div class="flex-1">
-          <label for="endDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">End Date:</label>
-          <input type="date" id="endDate" name="endDate" required
-            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" class="w-full bg-black text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold hover:bg-gray-800 transition text-sm sm:text-base">
-        Generate Commits
-      </button>
-    </form>
-  </div>
-</div>
-
+    </div>
   </section>
 
-  <!-- Popup Modal (Hidden by default) -->
-  <div id="formModal" class="hidden fixed inset-0 bg-black bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-2">
-    <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 w-full max-w-sm sm:max-w-3xl relative">
-      <button id="closeModal" class="absolute top-3 right-3 text-gray-600 text-2xl font-bold hover:text-black">&times;</button>
-    </div>
-  </div>
+  <footer class="text-center py-5">
+    <p class="text-sm">© Made by Sphinix All rights reserved.</p>
+  </footer>
 
+  <!-- Loader Script -->
   <script>
-    // Open Modal
-    document.getElementById("openModal").addEventListener("click", function () {
-      document.getElementById("formModal").classList.remove("hidden");
-    });
+    document.querySelector("form").addEventListener("submit", function () {
+      const btnText = document.getElementById("btnText");
+      const loader = document.getElementById("loader");
+      const button = document.getElementById("generateBtn");
 
-    // Close Modal
-    document.getElementById("closeModal").addEventListener("click", function () {
-      document.getElementById("formModal").classList.add("hidden");
-    });
-
-    // Close modal on outside click
-    window.addEventListener("click", function (e) {
-      const modal = document.getElementById("formModal");
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-      }
+      btnText.textContent = "Processing...";
+      loader.classList.remove("hidden");
+      button.disabled = true; // prevent multiple clicks
     });
   </script>
+
 </body>
 </html>
