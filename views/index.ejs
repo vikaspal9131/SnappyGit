@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SnappyGit</title>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Remix Icon -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
   <!-- Google Font -->
@@ -12,26 +16,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
 </head>
+
 <body class="font-[Gabarito] px-4 sm:px-6 lg:px-[100px]">
-<header class="w-full px-4 sm:px-6 py-4 flex justify-between items-center">
-  <div class="text-lg sm:text-xl flex items-center gap-1">
-    <i class="ri-dribbble-fill"></i> SnappyGit
-  </div>
-
-  <!-- ✅ Profile Section -->
-  <div id="profileSection" class="hidden flex items-center gap-3">
-    <img id="userPic" class="w-9 h-9 rounded-[10px]" alt="User" />
-
-  </div>
-
-  <!-- ✅ Login Button -->
- <button id="loginBtnGoogle" class="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full">
-      Sign in with Google
-    </button>
-</header>
 
 
-  <div class="text-center mt-[50px] sm:mt-[80px] lg:mt-[100px] mb-[80px] sm:mb-[100px] lg:mb-[140px] flex items-center justify-center gap-6 sm:gap-12 lg:gap-[100px] px-4">
+  <header class="w-full px-4 sm:px-6 py-4 flex justify-between items-center">
+    <div class="text-lg sm:text-xl flex items-center gap-1">
+      <i class="ri-dribbble-fill"></i> SnappyGit
+    </div>
+    <div id="profileSection" class="hidden relative">
+      <img id="userPic" class="w-9 h-9 rounded-[10px] border border-gray-300 cursor-pointer" alt="Profile">
+      <div id="logoutPopup"
+        class="hidden absolute right-0 mt-2 bg-white shadow-lg rounded-lg border border-gray-200 w-32 p-2">
+        <button id="logoutBtn" class="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-100 rounded">
+          Logout
+        </button>
+      </div>
+    </div>
+    <a id="loginBtn" href="/login"
+      class="bg-[#D2F94E] text-black px-4 sm:px-5 py-2 sm:py-1 rounded-[3px] font-semibold text-sm sm:text-base inline-block hover:bg-[#D2F94E]/80 transition 1">Login
+    </a>
+  </header>
+
+
+  <div
+    class="text-center mt-[50px] sm:mt-[80px] lg:mt-[100px] mb-[80px] sm:mb-[100px] lg:mb-[140px] flex items-center justify-center gap-6 sm:gap-12 lg:gap-[100px] px-4">
     <div class="flex">
       <p><i class="ri-add-fill text-3xl sm:text-7xl lg:text-8xl text-[#D2F94E]"></i></p>
       <div>
@@ -40,11 +49,12 @@
         </h1>
         <p class="mt-4 sm:mt-6 text-sm sm:text-base">
           Transform your GitHub profile with a consistently active look by developer journey
-          <br class="hidden sm:block">filling past gaps in your contribution graph and showcasing your real 
+          <br class="hidden sm:block">filling past gaps in your contribution graph and showcasing your real
         </p>
-        <button class="mt-4 bg-[#D2F94E] text-black px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base inline-block hover:bg-[#D2F94E]/80 transition 1">
+        <a
+          class="mt-4 bg-[#D2F94E] text-black px-4 sm:px-5 py-2 sm:py-3 rounded-[3px] font-semibold text-sm sm:text-base inline-block hover:bg-[#D2F94E]/80 transition 1">
           Generate Commits
-        </button>
+        </a>
       </div>
       <p><i class="ri-add-fill text-3xl sm:text-7xl lg:text-8xl text-[#D2F94E]"></i></p>
     </div>
@@ -59,191 +69,132 @@
           No Clue What to <br> Do Just Watch this !
         </h1>
         <p class="mt-4 text-gray-700 max-w-xl">
-          Watch this detailed step-by-step guide on creating your GitHub Personal Access Token, understanding the required scopes, and using it securely to generate commits to your repository.
+          Watch this detailed step-by-step guide on creating your GitHub Personal Access Token, understanding the
+          required scopes, and using it securely to generate commits to your repository.
         </p>
 
-       <div class="relative flex items-center justify-center px-3 py-7 rounded-lg mt-[40px]">
-  <!-- Background Image -->
-  <img 
-    src="https://w0.peakpx.com/wallpaper/236/488/HD-wallpaper-mac-os-ventura-dark-macos-ventura-macbook-apple-computer.jpg" 
-    alt="" 
-    class="absolute inset-0 w-full h-full object-cover rounded-lg z-0 blur-[1px] "
-  >
+        <div class="relative flex items-center justify-center px-3 py-7 rounded-lg mt-[40px]">
+          <!-- Background Image -->
+          <img
+            src="https://w0.peakpx.com/wallpaper/236/488/HD-wallpaper-mac-os-ventura-dark-macos-ventura-macbook-apple-computer.jpg"
+            alt="" class="absolute inset-0 w-full h-full object-cover rounded-lg z-0 blur-[1px] ">
 
-  <!-- Video on top -->
-  <video class="w-[550px] rounded-[10px] z-10 relative pointer-events-none select-none"
-    autoplay
-    loop
-    muted
-    playsinline
-    preload="auto">
-    <source src="/demo.mp4" type="video/mp4">
-  </video>
-</div>
+          <!-- Video on top -->
+          <video class="w-[550px] rounded-[10px] z-10 relative pointer-events-none select-none" autoplay loop muted
+            playsinline preload="auto">
+            <source src="/video/demo.mp4" type="video/mp4">
+          </video>
+        </div>
 
       </div>
     </div>
 
     <!-- Right Form -->
-    <div class="flex justify-center items-center w-full md:w-1/2 border">
-      <% if (typeof success !== "undefined" && success) { %>
-      <div style="
-          background: #d4edda;
-          color: #155724;
-          padding: 10px;
-          margin-bottom: 15px;
-          border: 1px solid #c3e6cb;
-          border-radius: 5px;
-          text-align: center;
-      ">
-          <%= success %>
-      </div>
+   <div class="flex justify-center items-center w-full md:w-1/2 border">
+  <% if (typeof success !=="undefined" && success) { %>
+    <div class="bg-green-100 text-green-800 p-3 mb-4 border border-green-300 rounded text-center">
+      <%= success %>
+    </div>
+  <% } %>
+
+  <div class="rounded-xl p-6 sm:p-8 w-full max-w-sm sm:max-w-3xl relative">
+    <div class="container">
+     
+      <% if (typeof message !=="undefined" && message) { %>
+        <div class="bg-red-100 text-red-600 p-3 mb-4 border border-red-600 rounded text-center">
+          <%= message %>
+        </div>
       <% } %>
 
-      <div class="rounded-xl p-6 sm:p-8 w-full max-w-sm sm:max-w-3xl relative">
-        <div class="container">
-          <!-- ✅ Error message show karega -->
-          <% if (typeof message !== "undefined" && message) { %>
-          <div style="
-              background: #ffdddd;
-              color: #d8000c;
-              padding: 10px;
-              margin-bottom: 15px;
-              border: 1px solid #d8000c;
-              border-radius: 5px;
-              text-align: center;
-          ">
-              <%= message %>
+      <h1 class="text-xl mb-[30px] text-gray-700">Fill in your repo details and pick a date range to begin
+      </h1>
+
+      <form action="/generate" method="POST" class="space-y-4 sm:space-y-5">
+        <!-- GitHub Username & Email -->
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
+          <div class="flex-1">
+            <label for="username" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub
+              Username:</label>
+            <input type="text" id="username" name="username" required
+              class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 placeholder-gray-500 border border-gray-300 rounded-lg outline-none focus:outline-none focus:ring-0 text-sm sm:text-base">
           </div>
-          <% } %>
 
-          <h1 class="text-xl mb-[10px] text-gray-700">Fill in your repo details and pick a date range to begin</h1>
-
-       <form action="/generate-commits" method="POST" class="space-y-4 sm:space-y-5">
-  <!-- GitHub Username & Email -->
-  <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
-    <div class="flex-1">
-      <label for="username" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Username:</label>
-      <input type="text" id="username" name="username" required
-        class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 placeholder-gray-500 border border-gray-300 rounded-lg outline-none focus:outline-none focus:ring-0 text-sm sm:text-base">
-    </div>
-
-    <div class="flex-1">
-      <div>
-        <label for="projectName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Select Project:</label>
-        <select id="projectName" name="projectName" required
-          class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
-          <% projects.forEach(project => { %>
-            <option value="<%= project %>"><%= project %></option>
-          <% }); %>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <!-- Repo Name -->
-  <div>
-    <label for="repoName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Repository Name (must exist):</label>
-    <input type="text" id="repoName" name="repoName" required
-      class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 placeholder-gray-500 border border-gray-300 text-sm sm:text-base">
-  </div>
-
-  <!-- Token -->
-  <div>
-    <label for="token" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub Personal Access Token:</label>
-    <input type="password" id="token" name="token" required
-      class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 placeholder-gray-500 border border-gray-300 text-sm sm:text-base">
-    <small class="text-gray-400">Needs 'repo' scope.</small>
-  </div>
-
-  <!-- Date Fields -->
-  <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
-    <div class="flex-1">
-      <label for="startDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Start Date:</label>
-      <input type="date" id="startDate" name="startDate" required
-        class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
-    </div>
-    
-    <div class="flex-1">
-      <label for="endDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">End Date:</label>
-      <input type="date" id="endDate" name="endDate" required
-        class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
-    </div>
-  </div>
-
-  <!-- Submit Button with Loader -->
-  <button id="generateBtn" type="submit"
-    class="relative w-full bg-black text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold hover:bg-gray-800 transition text-sm sm:text-base flex justify-center items-center gap-2 focus:outline-none focus:ring-0">
-    <span id="btnText">Generate Commits</span>
-    <span id="loader" class="hidden border-2 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></span>
-  </button>
-</form>
-
+          <div class="flex-1">
+            <div>
+              <label for="projectName"
+                class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Select Project:</label>
+              <select id="projectName" name="projectName" required
+                class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
+                <% projects.forEach(project=> { %>
+                  <option value="<%= project %>">
+                    <%= project %>
+                  </option>
+                <% }); %>
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <!-- Repo Name -->
+        <div>
+          <label for="repoName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Repository
+            Name (must exist):</label>
+          <input type="text" id="repoName" name="repoName" required
+            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 placeholder-gray-500 border border-gray-300 text-sm sm:text-base">
+        </div>
+
+        <!-- Token -->
+        <div>
+          <label for="token" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">GitHub
+            Personal Access Token:</label>
+          <input type="password" id="token" name="token" required
+            class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 placeholder-gray-500 border border-gray-300 text-sm sm:text-base">
+          <small class="text-gray-400">Needs 'repo' scope.</small>
+        </div>
+
+        <!-- Date Fields -->
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-5">
+          <div class="flex-1">
+            <label for="startDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">Start
+              Date:</label>
+            <input type="date" id="startDate" name="startDate" required
+              class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
+          </div>
+
+          <div class="flex-1">
+            <label for="endDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">End
+              Date:</label>
+            <input type="date" id="endDate" name="endDate" required
+              class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
+          </div>
+        </div>
+
+        <!-- Submit Button with Loader -->
+        <button id="generateBtn" type="submit"
+          class="relative w-full bg-black text-white px-4 sm:px-5 py-2 sm:py-3 rounded-[3px] font-semibold hover:bg-gray-800 transition text-sm sm:text-base flex justify-center items-center gap-2 focus:outline-none focus:ring-0">
+          <span id="btnText">Generate Commits</span>
+          <span id="loader"
+            class="hidden border-2 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></span>
+        </button>
+      </form>
     </div>
+  </div>
+</div>
+
   </section>
+
+
+
+
 
   <footer class="text-center py-5">
     <p class="text-sm">© Made by Sphinix All rights reserved.</p>
   </footer>
 
-  <!-- Loader Script -->
-  <!-- <script>
-    document.querySelector("form").addEventListener("submit", function () {
-      const btnText = document.getElementById("btnText");
-      const loader = document.getElementById("loader");
-      const button = document.getElementById("generateBtn");
-
-      btnText.textContent = "Processing";
-      loader.classList.remove("hidden");
-      button.disabled = true; // prevent multiple clicks
-    });
 
 
-
-
-    
-  </script> -->
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-
-
-// ✅ Firebase Config
-const firebaseConfig = {
-  apiKey: "<%= FIREBASE_API_KEY %>",
-  authDomain: "<%= FIREBASE_AUTH_DOMAIN %>",
-  projectId: "<%= FIREBASE_PROJECT_ID %>",
-  storageBucket: "<%= FIREBASE_STORAGE_BUCKET %>",
-  messagingSenderId: "<%= FIREBASE_MESSAGING_SENDER_ID %>",
-  appId: "<%= FIREBASE_APP_ID %>"
-};
-
-// ✅ Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// ✅ Google Sign-in
-document.getElementById("loginBtnGoogle").addEventListener("click", async () => {
-  try {
-    const result = await signInWithPopup(auth, new GoogleAuthProvider());
-    console.log("✅ Google login:", result.user.displayName);
-
-    // ✅ Save user data in localStorage (optional)
-    localStorage.setItem("userName", result.user.displayName);
-    localStorage.setItem("userEmail", result.user.email);
-    localStorage.setItem("userPic", result.user.photoURL);
-
-    // ✅ Redirect to homepage
-    window.location.href = "/";
-  } catch (error) {
-    console.error("Google login error:", error);
-    alert("Google login failed");
-  }
-});
-</script>
-
+  <script src="/scripts/index.js"></script>
+  <script src="/scripts/profile.js"></script>
 </body>
+
 </html>

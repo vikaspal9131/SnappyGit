@@ -36,7 +36,7 @@ router.get("/", (req, res) => {
 
 
 // ✅ Generate commits
-router.post('/generate-commits',
+router.post('/generate',
     gitEnvMiddleware.validateInput, 
     commitController.generateCommits
 );

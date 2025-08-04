@@ -1,38 +1,37 @@
- import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-  import { 
-    getAuth, 
-    onAuthStateChanged, 
-    signOut,
-    GoogleAuthProvider, 
-    GithubAuthProvider, 
-    signInWithPopup 
-  } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+const userPic = localStorage.getItem("userPic");
+const userName = localStorage.getItem("userName");
 
- 
-  const firebaseConfig = {
-    apiKey: "<%= FIREBASE_API_KEY %>",
-    authDomain: "<%= FIREBASE_AUTH_DOMAIN %>",
-    projectId: "<%= FIREBASE_PROJECT_ID %>",
-    storageBucket: "<%= FIREBASE_STORAGE_BUCKET %>",
-    messagingSenderId: "<%= FIREBASE_MESSAGING_SENDER_ID %>",
-    appId: "<%= FIREBASE_APP_ID %>",
-    measurementId: "<%= FIREBASE_MEASUREMENT_ID %>"
-  };
+  if (userPic) {
+    document.getElementById("profileSection").classList.remove("hidden");
+    document.getElementById("userPic").src = userPic;
+    document.getElementById("loginBtn").classList.add("hidden");
+  }
 
-  
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+  else {
+    console.log("No user picture found in localStorage.");
+  }
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      document.getElementById("profileSection").classList.remove("hidden");
-      document.getElementById("loginBtnHeader").classList.add("hidden");
-      document.getElementById("userPic").src = user.photoURL;
-    } else {
-      document.getElementById("profileSection").classList.add("hidden");
-      document.getElementById("loginBtnHeader").classList.remove("hidden");
+
+    const profilePic = document.getElementById("userPic");
+  const logoutPopup = document.getElementById("logoutPopup");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  // ✅ Show popup on profile click
+  profilePic.addEventListener("click", () => {
+    logoutPopup.classList.toggle("hidden");
+  });
+
+  // ✅ Logout user
+  logoutBtn.addEventListener("click", () => {
+    if (confirm("Are you sure you want to logout?")) {
+      localStorage.clear();
+      window.location.href = "/";
     }
   });
 
-
-console.log("Firebase Auth script loaded successfully");
+  // ✅ Close popup if clicked outside
+  document.addEventListener("click", (e) => {
+    if (!profilePic.contains(e.target) && !logoutPopup.contains(e.target)) {
+      logoutPopup.classList.add("hidden");
+    }
+  });
