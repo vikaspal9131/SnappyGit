@@ -18,10 +18,22 @@ function getProjectList() {
 }
 
 // ✅ Home page route
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
     const projects = getProjectList();
-    res.render('index', { message: null, projects });
+
+    res.render("index", { 
+        message: null, 
+        projects, 
+        FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
+        FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
+        FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
+        FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
+        FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
+        FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
+        FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID
+    });
 });
+
 
 // ✅ Generate commits
 router.post('/generate-commits',
@@ -34,14 +46,6 @@ router.get('/success', (req, res) => {
     res.render('success');
 });
 
-// ✅ Login page
-router.get('/login', (req, res) => {
-    res.render('login', { message: null });
-});
 
-// ✅ Logout (optional)
-router.get('/logout', (req, res) => {
-    res.redirect('/login');
-});
 
 module.exports = router;

@@ -3,35 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to SnappyGit</title>
+  <title>SnappyGit - Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
 </head>
-<body class="bg-white flex items-center justify-center h-screen font-[Gabarito] relative">
+<body class="flex items-center justify-center h-screen bg-gray-100">
 
-  <!-- Decorative Icons -->
-  <div class="absolute top-10 left-6 text-[#D2F94E] text-5xl sm:text-7xl"><i class="ri-add-fill"></i></div>
-  <div class="absolute bottom-10 right-6 text-[#D2F94E] text-5xl sm:text-7xl"><i class="ri-add-fill"></i></div>
-
-  <div class="w-full max-w-md p-6 rounded-md shadow-md bg-white border border-gray-200">
-    <!-- Heading -->
-    <h1 class="text-2xl font-bold mb-6 text-start">Welcome to SnappyGit</h1>
-
-    <!-- Continue with Google -->
-    <button class="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md py-3 hover:bg-gray-100 transition mb-4">
-      <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
-      Log in with Google
-    </button>
-
-    <!-- Continue with GitHub -->
-    <button class="w-full flex items-center justify-center gap-2 bg-[#D2F94E] text-black font-semibold rounded-md py-3 hover:bg-[#c8f03b] transition">
-      <i class="ri-github-fill text-lg"></i>
-      Log in with GitHub
-    </button>
-
-  
+  <div class="bg-white p-6 rounded-lg shadow-lg text-center w-80">
+    <h1 class="text-2xl font-bold mb-4">Welcome to SnappyGit</h1>
+    <p class="text-gray-600 mb-4">Sign in with your Google account to continue</p>
+    
+    <!-- ✅ Google Login Button -->
+   
   </div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+
+// ✅ Firebase Config
+const firebaseConfig = {
+  apiKey: "<%= FIREBASE_API_KEY %>",
+  authDomain: "<%= FIREBASE_AUTH_DOMAIN %>",
+  projectId: "<%= FIREBASE_PROJECT_ID %>",
+  storageBucket: "<%= FIREBASE_STORAGE_BUCKET %>",
+  messagingSenderId: "<%= FIREBASE_MESSAGING_SENDER_ID %>",
+  appId: "<%= FIREBASE_APP_ID %>"
+};
+
+// ✅ Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// ✅ Google Sign-in
+document.getElementById("loginBtnGoogle").addEventListener("click", async () => {
+  try {
+    const result = await signInWithPopup(auth, new GoogleAuthProvider());
+    console.log("✅ Google login:", result.user.displayName);
+
+    // ✅ Save user data in localStorage (optional)
+    localStorage.setItem("userName", result.user.displayName);
+    localStorage.setItem("userEmail", result.user.email);
+    localStorage.setItem("userPic", result.user.photoURL);
+
+    // ✅ Redirect to homepage
+    window.location.href = "/";
+  } catch (error) {
+    console.error("Google login error:", error);
+    alert("Google login failed");
+  }
+});
+</script>
 
 </body>
 </html>
