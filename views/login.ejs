@@ -4,28 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SnappyGit - Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="flex items-center justify-center h-screen bg-[#F5F5F5]">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <div class="bg-white p-8 rounded-lg shadow-lg text-center w-96">
-    <div class="flex justify-center mb-4">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#D2F94E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 6L9 17l-5-5"/>
-      </svg>
+  <!-- Remix Icon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
+
+</head>
+<body class="flex items-center justify-center h-screen bg-[#F5F5F5] font-[Gabarito]">
+
+
+  
+
+  <div class="p-8  text-start w-96">
+
+
+     
+    <div class="text-lg sm:text-xl flex items-center gap-1">
+      <i class="ri-dribbble-fill"></i> SnappyGit
     </div>
-    <h1 class="text-2xl font-bold mb-2 text-gray-900">Welcome to SnappyGit</h1>
-    <p class="text-gray-600 mb-6">Login with your account to continue</p>
+  
+
+    <div class="flex justify-center mb-4">
+     
+    </div>
+    <h1 class="text-2xl mb-2 text-gray-900">Welcome to SnappyGit</h1>
+    <p class="text-gray-600 mb-6 ">Login with your account to continue</p>
     
     <button id="loginBtnGoogle" 
-      class="flex items-center justify-center gap-3 w-full py-3 mb-4 bg-[#D2F94E] text-black rounded-lg hover:bg-[#D2F94E] transition duration-200 font-medium">
-      
+      class="flex items-center justify-center gap-3 w-full py-3 mb-4 bg-[#D2F94E] text-black rounded-[3px] ">
+      <i class="ri-google-fill"></i>
       Sign in with Google
     </button>
 
     <button id="loginBtnGithub" 
-      class="flex items-center justify-center gap-3 w-full py-3 bg-[#D2F94E] text- rounded-lg">
-     
+      class="flex items-center justify-center gap-3 w-full py-3 bg-[#D2F94E] rounded-[3px]">
+   <i class="ri-github-fill"></i>
       Sign in with GitHub
     </button>
   </div>

@@ -1,0 +1,38 @@
+
+.loader {
+  width: fit-content;
+  padding-bottom: 5px;
+  font-weight: 100;
+  font-family: monospace;
+  font-size: 23px;
+  overflow: hidden;
+  color: #0000;
+  text-shadow: 0 0 0 #000,10ch 0 0 #000;
+  background: linear-gradient(#000 0 0) bottom left/0% 3px no-repeat;
+  animation: l14 1.5s infinite;
+}
+.loader:before {
+  font-size: 100;
+  content: "Snappy Git";
+}
+@keyframes l14 {
+    80%  {text-shadow:    0  0 0 #000,10ch 0 0 #000;background-size:100% 3px}
+    100% {text-shadow: -10ch 0 0 #000,0    0 0 #000}
+}
+
+.loader-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 1s ease, transform 1s ease;
+  color: #000000  ;
+  font-weight: 300;
+}

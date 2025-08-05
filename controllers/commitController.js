@@ -38,16 +38,25 @@ const commitMessages = [
 ];
 
 exports.generateCommits = async (req, res) => {
-    const { username, repoName, startDate, endDate, token, projectName } = req.body;
+    const { username, repoName, startDate, endDate, token, projectName, commitsPerDay } = req.body;
 
     if (!username || !repoName || !startDate || !endDate || !token || !projectName) {
         return res.render('index', { message: 'Please provide all required fields.' });
+    }
+
+    // ✅ Initialize session storage for current user
+    if (!req.session.userProcesses) {
+        req.session.userProcesses = [];
     }
 
     const tempRepo = path.join(__dirname, '..', `temp_repo_${Date.now()}`);
     const projectZip = path.join(__dirname, '..', 'projects', `${projectName}.zip`);
     const start = new Date(startDate);
     const end = new Date(endDate);
+
+    // ✅ Take commits/day from user (default 5, max 10)
+    let commitsPerDayInput = parseInt(commitsPerDay) || 5;
+    const maxCommitsPerDay = Math.min(commitsPerDayInput, 10);
 
     try {
         if (fs.existsSync(tempRepo)) fs.rmSync(tempRepo, { recursive: true, force: true });
@@ -97,7 +106,6 @@ exports.generateCommits = async (req, res) => {
 
         // ✅ Calculate commits
         const totalDays = Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1);
-        const maxCommitsPerDay = 5;
         const totalCommits = totalDays * maxCommitsPerDay;
         const linesPerCommit = Math.max(1, Math.floor(totalLines / totalCommits));
 
@@ -162,7 +170,16 @@ exports.generateCommits = async (req, res) => {
         const remoteUrlWithToken = `https://${token}@github.com/${username}/${repoName}.git`;
         execSync(`git push ${remoteUrlWithToken} main --force`, { cwd: tempRepo });
 
-        res.redirect('/success');
+        // ✅ Save user process data in session
+        req.session.userProcesses.push({
+            projectName,
+            repoName,
+            commitsPerDay: maxCommitsPerDay,
+            status: 'Commits Generated Successfully',
+            time: new Date().toLocaleString()
+        });
+
+        res.render('success', { message: 'Commits generated successfully!', processes: req.session.userProcesses });
 
     } catch (error) {
         console.error('❌ Error generating commits:', error);
