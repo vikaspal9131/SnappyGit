@@ -81,14 +81,14 @@
           required scopes, and using it securely to generate commits to your repository.
         </p>
 
-        <div class="relative flex items-center justify-center px-3 py-7 rounded-lg mt-[40px]">
+        <div class="relative flex items-center justify-center px-3 py-5 rounded-lg mt-[40px]">
           <!-- Background Image -->
           <img
-            src="https://w0.peakpx.com/wallpaper/236/488/HD-wallpaper-mac-os-ventura-dark-macos-ventura-macbook-apple-computer.jpg"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg5j95Uix5Kw7JTqrMY805TvjbqnshDQkLiw&s"
             alt="" class="absolute inset-0 w-full h-full object-cover rounded-lg z-0 blur-[1px] ">
 
           <!-- Video on top -->
-          <video class="w-[550px] rounded-[10px] z-10 relative pointer-events-none select-none" autoplay loop muted
+          <video class="w-[550px] rounded-[3px] z-10 relative pointer-events-none select-none" autoplay loop muted
             playsinline preload="auto">
             <source src="/video/demo.mp4" type="video/mp4">
           </video>
@@ -124,7 +124,7 @@
             <label for="username" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">
               GitHub Username:
             </label>
-            <input type="text" id="username" name="username" required
+            <input type="text" id="username" name="username" required autocomplete="off"
               class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 placeholder-gray-500 border border-gray-300 rounded-lg outline-none focus:ring-0 text-sm sm:text-base">
           </div>
 
@@ -132,7 +132,7 @@
             <label for="projectName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">
               Select Project:
             </label>
-            <select id="projectName" name="projectName" required
+            <select id="projectName" name="projectName" required autocomplete="off"
               class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
               <% projects.forEach(project=> { %>
                 <option value="<%= project %>"><%= project %></option>
@@ -147,7 +147,7 @@
             <label for="repoName" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">
               Repository Name (must exist):
             </label>
-            <input type="text" id="repoName" name="repoName" required
+            <input type="text" id="repoName" name="repoName" required autocomplete="off"
               class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:ring-0 placeholder-gray-500 border border-gray-300 text-sm sm:text-base">
           </div>
 
@@ -155,7 +155,7 @@
             <label for="commitsPerDay" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">
               Commits/Day (Max 10):
             </label>
-            <select id="commitsPerDay" name="commitsPerDay" required
+            <select id="commitsPerDay" name="commitsPerDay" required autocomplete="off"
               class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
               <option value="1">1 Commit/day</option>
               <option value="2">2 Commits/day</option>
@@ -187,7 +187,7 @@
             <label for="startDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">
               Start Date:
             </label>
-            <input type="date" id="startDate" name="startDate" required
+            <input type="date" id="startDate" name="startDate" required  autocomplete="off"
               class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
           </div>
 
@@ -195,33 +195,71 @@
             <label for="endDate" class="block mb-1 text-gray-700 font-medium text-sm sm:text-base">
               End Date:
             </label>
-            <input type="date" id="endDate" name="endDate" required
+            <input type="date" id="endDate" name="endDate" required autocomplete="off"
               class="w-full bg-transparent text-black px-3 sm:px-4 py-2 sm:py-3 rounded-lg outline-none focus:ring-0 border border-gray-300 text-sm sm:text-base">
           </div>
         </div>
 
         <!-- Submit Button with Loader -->
-        <button id="generateBtn" type="submit"
-          class="relative w-full bg-black text-white px-4 sm:px-5 py-2 sm:py-3 rounded-[3px] font-semibold hover:bg-gray-800 transition text-sm sm:text-base flex justify-center items-center gap-2 focus:outline-none focus:ring-0">
-          <span id="btnText">Generate Commits</span>
-          <span id="loader"
-            class="hidden border-2 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></span>
-        </button>
+<button id="generateBtn" type="submit"
+  class="relative w-full bg-black text-white px-4 sm:px-5 py-2 sm:py-3 rounded-[3px] font-semibold hover:bg-gray-800 transition text-sm sm:text-base flex justify-center items-center gap-2 focus:outline-none focus:ring-0">
+  <span id="btnLoader"
+    class="hidden border-2 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></span>
+  <span id="btnText">Generate Commits</span>
+
+
+</button>
+
+
       </form>
     </div>
   </div>
 </div>
-
-
-  </section>
+</section>
 
 
 
 
 
-  <footer class="text-center py-5">
-    <p class="text-sm">© Made by Sphinix All rights reserved.</p>
-  </footer>
+ <footer class="bg-white shadow-sm py-4">
+  <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
+    
+    <!-- Left Section -->
+    <div class=" gap-2 mb-3 md:mb-0">
+      <span class="text-lg font-semibold">SnappyGit </span>
+        <div class="text-sm text-gray-500 mb-3 md:mb-0">
+      © 2025 SnappyGit, All rights reserved.
+    </div>
+    </div>
+
+    <!-- Middle Section -->
+  
+
+    <!-- Right Section -->
+    <div class="flex items-center gap-4">
+    
+      <a href="#" class="text-xl hover:text-gray-600"><i class="ri-twitter-x-line"></i></a>
+      <a href="#" class="text-xl hover:text-gray-600"><i class="ri-instagram-line"></i></a>
+      <a href="#" class="text-xl hover:text-gray-600"><i class="ri-linkedin-box-line"></i></a>
+      <a href="#" class="text-xl hover:text-gray-600"><i class="ri-mail-line"></i></a>
+    </div>
+
+  </div>
+</footer>
+ <script>
+ document.querySelector("form").addEventListener("submit", function () {
+  const btnText = document.getElementById("btnText");
+  const loader = document.getElementById("btnLoader");
+  const button = document.getElementById("generateBtn");
+
+  btnText.textContent = "Processing...";
+  loader.classList.remove("hidden");
+  button.disabled = true;
+});
+
+ </script>
+<!-- Remix Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
 
 

@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function saveUserData(user) {
     localStorage.setItem("userName", user.displayName || "GitHub User");
     localStorage.setItem("userEmail", user.email || "No email provided");
-    localStorage.setItem("userPic", user.photoURL || "https://www.svgrepo.com/show/475647/github-color.svg");
+    localStorage.setItem("userPic", user.photoURL || "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png");
     window.location.href = "/";
   }
 });

@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const AdmZip = require('adm-zip');
 
-// ✅ 30 Common Commit Messages
+
 const commitMessages = [
     "update project files and improvements",
     "refactor: minor code structure improvements",
@@ -44,7 +44,7 @@ exports.generateCommits = async (req, res) => {
         return res.render('index', { message: 'Please provide all required fields.' });
     }
 
-    // ✅ Initialize session storage for current user
+    //  Initialize session storage for current user
     if (!req.session.userProcesses) {
         req.session.userProcesses = [];
     }
@@ -54,7 +54,7 @@ exports.generateCommits = async (req, res) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
 
-    // ✅ Take commits/day from user (default 5, max 10)
+    //  Take commits/day from user (default 5, max 10)
     let commitsPerDayInput = parseInt(commitsPerDay) || 5;
     const maxCommitsPerDay = Math.min(commitsPerDayInput, 10);
 
@@ -68,7 +68,7 @@ exports.generateCommits = async (req, res) => {
         const zip = new AdmZip(projectZip);
         zip.extractAllTo(tempRepo, true);
 
-        // ✅ Init repo
+        //  Init repo
         execSync('git init', { cwd: tempRepo });
         execSync('git branch -M main', { cwd: tempRepo });
         execSync(`git remote add origin https://github.com/${username}/${repoName}.git`, { cwd: tempRepo });
@@ -79,7 +79,7 @@ exports.generateCommits = async (req, res) => {
             console.warn('Pull failed, probably empty repo. Continuing...');
         }
 
-        // ✅ Get all code files except README & non-code
+        //  Get all code files except README & non-code
         function getAllFiles(dirPath, arrayOfFiles = [], basePath = dirPath) {
             const files = fs.readdirSync(dirPath);
             files.forEach(file => {
@@ -95,7 +95,7 @@ exports.generateCommits = async (req, res) => {
         }
         let allFiles = getAllFiles(tempRepo);
 
-        // ✅ Map files and their lines
+        //  Map files and their lines
         let fileMap = {};
         let totalLines = 0;
         allFiles.forEach(file => {
@@ -104,7 +104,7 @@ exports.generateCommits = async (req, res) => {
             totalLines += content.length;
         });
 
-        // ✅ Calculate commits
+        //  Calculate commits
         const totalDays = Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1);
         const totalCommits = totalDays * maxCommitsPerDay;
         const linesPerCommit = Math.max(1, Math.floor(totalLines / totalCommits));
@@ -112,7 +112,7 @@ exports.generateCommits = async (req, res) => {
         let currentDate = new Date(start);
         let fileQueue = Object.entries(fileMap).map(([file, lines]) => ({ file, lines, index: 0 }));
 
-        // ✅ Helper: modify existing code
+        //  Helper: modify existing code
         function modifyExistingCode(filePath) {
             let content = fs.readFileSync(filePath, 'utf-8').split('\n');
             if (content.length > 0) {
@@ -126,7 +126,7 @@ exports.generateCommits = async (req, res) => {
             }
         }
 
-        // ✅ Loop over dates
+        // Loop over dates
         while (currentDate <= end) {
             let commitsToday = Math.floor(Math.random() * maxCommitsPerDay) + 1;
 
@@ -143,14 +143,14 @@ exports.generateCommits = async (req, res) => {
                     if (linesAdded >= linesPerCommit) break;
                 }
 
-                // ✅ If no new code left → modify existing file
+                //  If no new code left → modify existing file
                 if (linesAdded === 0) {
                     const randomFile = allFiles[Math.floor(Math.random() * allFiles.length)];
                     modifyExistingCode(path.join(tempRepo, randomFile));
                     execSync(`git add "${randomFile}"`, { cwd: tempRepo });
                 }
 
-                // ✅ Random Commit Message
+                //  Random Commit Message
                 const commitMsg = commitMessages[Math.floor(Math.random() * commitMessages.length)];
 
                 execSync(`git commit -m "${commitMsg}"`, {
@@ -166,11 +166,11 @@ exports.generateCommits = async (req, res) => {
             currentDate.setDate(currentDate.getDate() + 1);
         }
 
-        // ✅ Push to repo
+        //  Push to repo
         const remoteUrlWithToken = `https://${token}@github.com/${username}/${repoName}.git`;
         execSync(`git push ${remoteUrlWithToken} main --force`, { cwd: tempRepo });
 
-        // ✅ Save user process data in session
+        // Save user process data in session
         req.session.userProcesses.push({
             projectName,
             repoName,
@@ -182,7 +182,7 @@ exports.generateCommits = async (req, res) => {
         res.render('success', { message: 'Commits generated successfully!', processes: req.session.userProcesses });
 
     } catch (error) {
-        console.error('❌ Error generating commits:', error);
+        console.error(' Error generating commits:', error);
         res.render('index', { message: `Error: ${error.message}` });
     } finally {
         await new Promise(r => setTimeout(r, 100));

@@ -14,7 +14,6 @@ window.addEventListener('load', () => {
 });
 
 
-
 document.querySelector("form").addEventListener("submit", function () {
       const btnText = document.getElementById("btnText");
       const loader = document.getElementById("loader");
