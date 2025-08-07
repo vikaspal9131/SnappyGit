@@ -1,4 +1,8 @@
 
+  html {
+      scroll-behavior: smooth;
+    }
+
 .loader {
   width: fit-content;
   padding-bottom: 5px;
