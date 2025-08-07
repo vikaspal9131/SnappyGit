@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
-const session = require('express-session');   // ✅ Session module
+const session = require('express-session');   //  Session module
 const githubRoutes = require('./routes/github');
 const firebaseConfigRoute = require("./routes/firebaseConfig");
 
@@ -21,15 +21,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Session setup
+//  Session setup
 app.use(session({
-    secret: 'secret-key', // ⚠️ Production me strong secret use karein
+    secret: 'secret-key', //  Production me strong secret use karein
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 600000 } // session expiry (10 min)
 }));
 
-// ✅ Routes
+// Routes
 app.use('/', githubRoutes);
 app.use('/login', firebaseConfigRoute);
 
@@ -44,7 +44,7 @@ app.use((err, req, res, next) => {
     res.status(500).render('index', { message: 'Something went wrong!' });
 });
 
-// ✅ Start Server
+//  Start Server
 app.listen(PORT, () => {
     console.log(` Server running on port ${PORT}`);
 });
