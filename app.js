@@ -17,9 +17,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 app.use(session({
     secret: 'secret-key', 
@@ -32,6 +32,7 @@ app.use(session({
 app.use('/', githubRoutes);
 app.use('/login', firebaseConfigRoute);
 
+
 app.use((req, res) => {
     res.status(404).render('404', { message: 'Page not found' });
 });
@@ -42,6 +43,11 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(PORT, () => {
-    console.log(` Server running on port ${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+
+module.exports = app;
