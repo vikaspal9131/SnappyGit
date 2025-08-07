@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const AdmZip = require('adm-zip');
-const axios = require('axios'); // Added for API request
+const axios = require('axios');
 
 const commitMessages = [
     "update project files and improvements",
@@ -38,13 +38,12 @@ const commitMessages = [
 ];
 
 exports.generateCommits = async (req, res) => {
-    const { repoName, startDate, endDate, token, projectName, commitsPerDay } = req.body;
+    const { repoName, startDate, endDate, token, projectName, commitsPerDay, maxSkipDays } = req.body;
 
     if (!repoName || !startDate || !endDate || !token || !projectName) {
         return res.render('index', { message: 'Please provide all required fields.' });
     }
 
-    // Initialize session storage for current user
     if (!req.session.userProcesses) {
         req.session.userProcesses = [];
     }
@@ -56,9 +55,9 @@ exports.generateCommits = async (req, res) => {
 
     let commitsPerDayInput = parseInt(commitsPerDay) || 5;
     const maxCommitsPerDay = Math.min(commitsPerDayInput, 10);
+    const maxSkips = Math.min(parseInt(maxSkipDays) || 0, 7);
 
     try {
-        //  Fetch username and email from PAT
         const userData = await axios.get("https://api.github.com/user", {
             headers: { Authorization: `token ${token}` }
         });
@@ -74,7 +73,6 @@ exports.generateCommits = async (req, res) => {
         const zip = new AdmZip(projectZip);
         zip.extractAllTo(tempRepo, true);
 
-        // Init repo
         execSync('git init', { cwd: tempRepo });
         execSync('git branch -M main', { cwd: tempRepo });
         execSync(`git remote add origin https://github.com/${username}/${repoName}.git`, { cwd: tempRepo });
@@ -85,11 +83,9 @@ exports.generateCommits = async (req, res) => {
             console.warn('Pull failed, probably empty repo. Continuing...');
         }
 
-        //  Set commit author to user from PAT
         execSync(`git config user.name "${username}"`, { cwd: tempRepo });
         execSync(`git config user.email "${email}"`, { cwd: tempRepo });
 
-        // Get all code files except README & non-code
         function getAllFiles(dirPath, arrayOfFiles = [], basePath = dirPath) {
             const files = fs.readdirSync(dirPath);
             files.forEach(file => {
@@ -103,9 +99,9 @@ exports.generateCommits = async (req, res) => {
             });
             return arrayOfFiles;
         }
+
         let allFiles = getAllFiles(tempRepo);
 
-        // Map files and their lines
         let fileMap = {};
         let totalLines = 0;
         allFiles.forEach(file => {
@@ -114,15 +110,26 @@ exports.generateCommits = async (req, res) => {
             totalLines += content.length;
         });
 
-        // Calculate commits
         const totalDays = Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1);
         const totalCommits = totalDays * maxCommitsPerDay;
         const linesPerCommit = Math.max(1, Math.floor(totalLines / totalCommits));
 
+        // 🔁 Generate random skip dates
+        let skipDaysSet = new Set();
+        if (maxSkips > 0) {
+            let allDates = [];
+            let d = new Date(start);
+            while (d <= end) {
+                allDates.push(new Date(d));
+                d.setDate(d.getDate() + 1);
+            }
+            allDates.sort(() => 0.5 - Math.random());
+            skipDaysSet = new Set(allDates.slice(0, maxSkips).map(d => d.toISOString().split('T')[0]));
+        }
+
         let currentDate = new Date(start);
         let fileQueue = Object.entries(fileMap).map(([file, lines]) => ({ file, lines, index: 0 }));
 
-        // Helper: modify existing code
         function modifyExistingCode(filePath) {
             let content = fs.readFileSync(filePath, 'utf-8').split('\n');
             if (content.length > 0) {
@@ -136,8 +143,13 @@ exports.generateCommits = async (req, res) => {
             }
         }
 
-        // Loop over dates
         while (currentDate <= end) {
+            const dateStr = currentDate.toISOString().split('T')[0];
+            if (skipDaysSet.has(dateStr)) {
+                currentDate.setDate(currentDate.getDate() + 1);
+                continue; // skip this date
+            }
+
             let commitsToday = Math.floor(Math.random() * maxCommitsPerDay) + 1;
 
             for (let c = 0; c < commitsToday; c++) {
@@ -160,7 +172,6 @@ exports.generateCommits = async (req, res) => {
                 }
 
                 const commitMsg = commitMessages[Math.floor(Math.random() * commitMessages.length)];
-
                 execSync(`git commit -m "${commitMsg}"`, {
                     cwd: tempRepo,
                     env: {
@@ -174,7 +185,6 @@ exports.generateCommits = async (req, res) => {
             currentDate.setDate(currentDate.getDate() + 1);
         }
 
-        // Push to repo using PAT
         const remoteUrlWithToken = `https://${token}@github.com/${username}/${repoName}.git`;
         execSync(`git push ${remoteUrlWithToken} main --force`, { cwd: tempRepo });
 
