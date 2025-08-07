@@ -22,6 +22,7 @@ window.addEventListener('load', () => {
       btnText.textContent = "Processing...";
       loader.classList.remove("hidden");
       button.disabled = true;
+      
     });
 
 

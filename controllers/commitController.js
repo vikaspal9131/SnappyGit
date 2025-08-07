@@ -199,7 +199,7 @@ exports.generateCommits = async (req, res) => {
         res.render('success', { message: `Commits generated successfully as ${username}`, processes: req.session.userProcesses });
 
     } catch (error) {
-        console.error(' Error generating commits:', error);
+       
         res.render('index', { message: `Error: ${error.message}` });
     } finally {
         await new Promise(r => setTimeout(r, 100));

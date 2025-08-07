@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await signInWithPopup(auth, new GoogleAuthProvider());
       saveUserData(result.user);
     } catch (error) {
-      console.error("Google login error:", error);
+      
       alert("Google login failed");
     }
   });
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
           alert("Account exists with another provider. Please use that to login.");
         }
       } else {
-        console.error("GitHub login error:", error);
+       
         alert("GitHub login failed");
       }
     }
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         saveUserData(linkedResult.user);
       }
     } catch (error) {
-      console.error("Linking error:", error);
+     
       alert("Account linking failed");
     }
   });
