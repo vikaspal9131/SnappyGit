@@ -114,7 +114,7 @@ exports.generateCommits = async (req, res) => {
         const totalCommits = totalDays * maxCommitsPerDay;
         const linesPerCommit = Math.max(1, Math.floor(totalLines / totalCommits));
 
-        // 🔁 Generate random skip dates
+     
         let skipDaysSet = new Set();
         if (maxSkips > 0) {
             let allDates = [];

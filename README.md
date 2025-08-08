@@ -1,1 +1,24 @@
- <img class="w-full " src="https://25.media.tumblr.com/d59ac57c7be4085e22ae87e2ca5d7c70/tumblr_mx9io0pNB71r5510so1_500.gif" alt="">
+# SnappyGit
+
+SnappyGit ek powerful tool hai jo aapko GitHub repositories me backdated commits create karne ki suvidha deta hai.  
+Isse aap apne GitHub contribution graph ko past dates ke hisaab se update kar sakte hain, jisse aapke contributions authentic dikhte hain.
+
+---
+
+## Features
+
+- Backdated commits generate karna asaan  
+- Multiple repositories support  
+- Custom commit messages likhne ki suvidha  
+- Real commits GitHub par push karna  
+- Simple web interface for ease of use  
+- Secure GitHub OAuth login
+
+---
+
+
+---
+
+## Installation
+
+1. Project folder me navigate karein:
