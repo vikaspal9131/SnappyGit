@@ -10,6 +10,25 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+// 1️⃣ CORS middleware sabse pehle
+app.use(cors({
+  origin: ["https://snappy-git.vercel.app/"], // Vercel ka domain
+  credentials: true
+}));
+
+// 2️⃣ Session middleware CORS ke baad
+app.use(session({
+  secret: 'your_secret', // apna secret rakho
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: true,      // production me true
+    sameSite: 'none'   // cross-site auth ke liye none
+  }
+}));
+
+
 // View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
