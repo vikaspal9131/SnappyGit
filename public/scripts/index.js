@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
                   document.body.style.overflow = 'auto';
                   typeEffect();
             }, 1000);
-      }, 3000);
+      }, 1000);
 });
 
 
