@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 const path = require('path');
 const session = require('express-session');
 const githubRoutes = require('./routes/github');
-const firebaseConfigRoute = require("./routes/firebaseConfig");
 const cors = require('cors');
 
 dotenv.config();
@@ -11,7 +10,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enable CORS so frontend Firebase SDK can access
+// Enable CORS for Firebase SDK
 app.use(cors());
 
 // View engine
@@ -33,11 +32,10 @@ app.use(session({
     cookie: { maxAge: 600000 }
 }));
 
-// Routes
+// GitHub Auth Routes
 app.use('/', githubRoutes);
-app.use('/login', firebaseConfigRoute);
 
-// Extra route to send Firebase config from env to frontend
+// Firebase config route (frontend will fetch it)
 app.get('/firebase-config', (req, res) => {
     res.json({
         apiKey: process.env.FIREBASE_API_KEY,
@@ -49,20 +47,26 @@ app.get('/firebase-config', (req, res) => {
     });
 });
 
-// 404
+// Login Page (render EJS)
+app.get('/login', (req, res) => {
+    res.render('login'); // views/login.ejs hona chahiye
+});
+
+// 404 handler
 app.use((req, res) => {
     res.status(404).render('404', { message: 'Page not found' });
 });
 
 // Error handler
 app.use((err, req, res, next) => {
+    console.error(err);
     res.status(500).render('index', { message: 'Something went wrong!' });
 });
 
 // Start server
 if (require.main === module) {
     app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
+        console.log(`✅ Server running on port ${PORT}`);
     });
 }
 
