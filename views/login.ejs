@@ -16,38 +16,25 @@
 
 </head>
 <body class="flex items-center justify-center h-screen bg-[#F5F5F5] font-[Gabarito]">
-
-
-  
-
-  <div class="p-8  text-start w-96">
-
-
-     
+  <div class="p-8  text-start w-96 border rounded-[5px]">
     <div class="text-lg sm:text-xl flex items-center gap-1">
     <i class="ri-git-merge-fill"></i>SnappyGit
     </div>
-  
-
     <div class="flex justify-center mb-4">
-     
     </div>
     <h1 class="text-2xl mb-2 text-gray-900">Welcome to SnappyGit</h1>
     <p class="text-gray-600 mb-6 ">Login with your account to continue</p>
-    
     <button id="loginBtnGoogle" 
-      class="flex items-center justify-center gap-3 w-full py-3 mb-4 bg-[#D2F94E] text-black rounded-[3px] ">
+      class="flex items-center justify-center gap-3 w-full py-2 mb-4 bg-[#D2F94E] text-black rounded-[3px] ">
       <i class="ri-google-fill"></i>
       Sign in with Google
     </button>
-
     <button id="loginBtnGithub" 
-      class="flex items-center justify-center gap-3 w-full py-3 bg-[#D2F94E] rounded-[3px]">
+      class="flex items-center justify-center gap-3 w-full py-2 bg-[#D2F94E] rounded-[3px]">
    <i class="ri-github-fill"></i>
       Sign in with GitHub
     </button>
   </div>
-
   <div id="linkModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
     <div class="bg-white p-6 rounded-lg w-80 text-center">
       <h2 class="text-lg font-bold mb-3">Account Already Exists</h2>
@@ -58,7 +45,6 @@
       </div>
     </div>
   </div>
-
 <script>
   window.FIREBASE_CONFIG = {
     apiKey: "<%= FIREBASE_API_KEY %>",
@@ -69,8 +55,6 @@
     appId: "<%= FIREBASE_APP_ID %>"
   };
 </script>
-
-
-  <script type="module" src="/auth/register.js"></script>
+<script type="module" src="/auth/register.js"></script>
 </body>
 </html>
