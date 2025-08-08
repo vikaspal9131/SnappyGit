@@ -1,46 +1,64 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import { 
-  getAuth, GoogleAuthProvider, GithubAuthProvider, 
-  signInWithRedirect, getRedirectResult, 
+  getAuth, GoogleAuthProvider, GithubAuthProvider, signInWithPopup,
   fetchSignInMethodsForEmail, linkWithCredential 
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
+
   const firebaseConfig = window.FIREBASE_CONFIG;
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   let pendingGithubCredential = null;
 
-  // Handle redirect result
-  try {
-    const result = await getRedirectResult(auth);
-    if (result && result.user) {
+  document.getElementById("loginBtnGoogle").addEventListener("click", async () => {
+    try {
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
       saveUserData(result.user);
+    } catch (error) {
+      
+      alert("Google login failed");
     }
-  } catch (error) {
-    console.error(error);
-  }
-
-  document.getElementById("loginBtnGoogle").addEventListener("click", () => {
-    signInWithRedirect(auth, new GoogleAuthProvider());
   });
 
-  document.getElementById("loginBtnGithub").addEventListener("click", () => {
-    signInWithRedirect(auth, new GithubAuthProvider());
+
+  document.getElementById("loginBtnGithub").addEventListener("click", async () => {
+    try {
+      const result = await signInWithPopup(auth, new GithubAuthProvider());
+      saveUserData(result.user);
+    } catch (error) {
+      if (error.code === "auth/account-exists-with-different-credential") {
+        const email = error.customData.email;
+        pendingGithubCredential = error.credential;
+
+        const providers = await fetchSignInMethodsForEmail(auth, email);
+        if (providers.includes("google.com")) {
+          document.getElementById("linkModal").classList.remove("hidden");
+        } else {
+          alert("Account exists with another provider. Please use that to login.");
+        }
+      } else {
+       
+        alert("GitHub login failed");
+      }
+    }
   });
+
 
   document.getElementById("confirmLink").addEventListener("click", async () => {
     document.getElementById("linkModal").classList.add("hidden");
     try {
-      const googleResult = await signInWithRedirect(auth, new GoogleAuthProvider());
+      const googleResult = await signInWithPopup(auth, new GoogleAuthProvider());
       if (pendingGithubCredential) {
         const linkedResult = await linkWithCredential(googleResult.user, pendingGithubCredential);
         saveUserData(linkedResult.user);
       }
     } catch (error) {
+     
       alert("Account linking failed");
     }
   });
+
 
   document.getElementById("cancelLink").addEventListener("click", () => {
     document.getElementById("linkModal").classList.add("hidden");
