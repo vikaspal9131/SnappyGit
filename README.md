@@ -1,24 +1,39 @@
 # SnappyGit
 
-SnappyGit ek powerful tool hai jo aapko GitHub repositories me backdated commits create karne ki suvidha deta hai.  
-Isse aap apne GitHub contribution graph ko past dates ke hisaab se update kar sakte hain, jisse aapke contributions authentic dikhte hain.
-
----
+SnappyGit is a powerful tool that enables users to create real backdated commits on their GitHub repositories. Unlike simple visual hacks or tools that just update the README file to fake contribution activity, SnappyGit does NOT just update README or any single file. Instead, it pushes actual commits with backdated timestamps across your repository, making your GitHub contribution graph authentically green.
 
 ## Features
-
-- Backdated commits generate karna asaan  
-- Multiple repositories support  
-- Custom commit messages likhne ki suvidha  
-- Real commits GitHub par push karna  
-- Simple web interface for ease of use  
-- Secure GitHub OAuth login
-
----
+- Select from your existing repositories added to the platform
+- Create commits on any past date you choose
+- Push real commits to GitHub — not just a visual trick
+- Your contribution chart updates authentically with these commits
+- Easy-to-use interface for commit generation and repository selection
 
 
----
+
+## Live Demo
+You can try SnappyGit online here: https://snappygit.onrender.com
 
 ## Installation
+Clone the repository:
+```bash
+git clone https://github.com/vikaspal9131/SnappyGit.git
+```
 
-1. Project folder me navigate karein:
+Navigate into the project directory:
+```bash
+cd SnappyGit
+```
+
+Install dependencies:
+```bash
+npm install
+```
+
+
+## Contribution
+Want to improve SnappyGit?
+
+1. Fork the repository  
+2. Implement your features or bug fixes  
+3. Send a pull request  
