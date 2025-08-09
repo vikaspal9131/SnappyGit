@@ -5,7 +5,6 @@ const router = express.Router();
 const commitController = require('../controllers/commitController'); 
 const gitEnvMiddleware = require('../middlewares/gitEnvMiddleware'); 
 
-// ✅ Function to get project list dynamically
 function getProjectList() {
     const projectPath = path.join(__dirname, '..', 'projects');
     let projectList = [];
@@ -17,7 +16,6 @@ function getProjectList() {
     return projectList;
 }
 
-// ✅ Home page route
 router.get("/", (req, res) => {
     const projects = getProjectList();
 
@@ -34,18 +32,17 @@ router.get("/", (req, res) => {
     });
 });
 
-
-// ✅ Generate commits
 router.post('/generate',
     gitEnvMiddleware.validateInput, 
     commitController.generateCommits
 );
 
-// ✅ Success page
 router.get('/success', (req, res) => {
     res.render('success');
 });
 
 
-
-module.exports = router;
+module.exports = {
+    router,
+    getProjectList
+};
